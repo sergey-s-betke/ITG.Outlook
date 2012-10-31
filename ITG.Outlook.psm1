@@ -908,6 +908,11 @@ function Set-Contact {
 					$InputObject.LastName, $InputObject.FirstName, $InputObject.MiddleName `
 					| ? { $_ } 
 				) -join ' ';
+				$InputObject.User1 = $InputObject.LastName;
+				$InputObject.User2 = ( 
+					$InputObject.FirstName, $InputObject.MiddleName `
+					| ? { $_ } 
+				) -join ' ';
 				if ( $Email1Address ) {
 					$InputObject.Email1DisplayName = $InputObject.Subject;
 				};
