@@ -463,6 +463,8 @@ function New-Contact {
 		$Contacts = $Outlook.GetNamespace('MAPI').GetDefaultFolder(
 			[Microsoft.Office.Interop.Outlook.OlDefaultFolders]::olFolderContacts
 		).Items;
+		$SetContact = ( { & (get-command Set-Contact) @PSBoundParameters } ).GetSteppablePipeline();
+		$SetContact.Begin( $true );
 	}
 	process {
 		$Params = @{};
@@ -479,12 +481,12 @@ function New-Contact {
 			if ( -not $Contact ) {
 				$Contact = $Contacts.Add( 2 );
 			};
-			$Contact `
-			| Set-Contact @PSBoundParameters `
-			| Out-Null `
-			;
+			$res = $SetContact.Process( $Contact );
 			if ( $PassThru ) { return $Contact; }
 		};
+	}
+	end {
+		$SetContact.End();
 	}
 }  
 
