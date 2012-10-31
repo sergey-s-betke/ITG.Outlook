@@ -33,7 +33,7 @@ function Get-Contact {
 		[Parameter(
 			Mandatory=$false
 			, ValueFromPipelineByPropertyName=$true
-			, ParameterSetName="Properties"
+			, ParameterSetName="contactProperties"
 		)]
 		[System.String]
 		[ValidateNotNullOrEmpty()]
@@ -45,7 +45,7 @@ function Get-Contact {
 		[Parameter(
 			Mandatory=$false
 			, ValueFromPipelineByPropertyName=$true
-			, ParameterSetName="Properties"
+			, ParameterSetName="contactProperties"
 		)]
 		[System.String]
 		[ValidateNotNullOrEmpty()]
@@ -56,7 +56,7 @@ function Get-Contact {
 		[Parameter(
 			Mandatory=$false
 			, ValueFromPipelineByPropertyName=$true
-			, ParameterSetName="Properties"
+			, ParameterSetName="contactProperties"
 		)]
 		[System.String]
 		$MiddleName
@@ -70,9 +70,11 @@ function Get-Contact {
 	}
 	process {
 		if ( $PSCmdlet.ParameterSetName -ne 'Filter' ) {
+			$Params = (Get-Command Set-Contact).Parameters;
 			$Filter = (
-				$PSBoundParameters.Keys `
-				| ? { $PSBoundParameters.$_ } `
+    			$Params.Keys `
+    			| ? { $Params.$_.ParameterSets.ContainsKey('contactProperties') } `
+    			| ? { $PSBoundParameters.$_ } `
 				| % { "[$_]='$($PSBoundParameters.$_)'" } `
 			) -join ' AND ';
 		};
@@ -463,8 +465,6 @@ function New-Contact {
 		$Contacts = $Outlook.GetNamespace('MAPI').GetDefaultFolder(
 			[Microsoft.Office.Interop.Outlook.OlDefaultFolders]::olFolderContacts
 		).Items;
-		$SetContact = ( { & (get-command Set-Contact) @PSBoundParameters } ).GetSteppablePipeline();
-		$SetContact.Begin( $true );
 	}
 	process {
 		$Params = @{};
@@ -481,12 +481,10 @@ function New-Contact {
 			if ( -not $Contact ) {
 				$Contact = $Contacts.Add( 2 );
 			};
-			$res = $SetContact.Process( $Contact );
-			if ( $PassThru ) { return $Contact; }
+			$Contact `
+            | Set-Contact @PSBoundParameters `
+            ;
 		};
-	}
-	end {
-		$SetContact.End();
 	}
 }  
 
