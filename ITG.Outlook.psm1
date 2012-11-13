@@ -22,7 +22,7 @@ function Get-Contact {
 	)]
 	
 	param (
-		# Поисковый запрос в [синтаксисе Outlook][Синтаксис языка фильтров Outlook]
+		# Поисковый запрос в [синтаксисе Outlook](http://office.microsoft.com/ru-ru/outlook-help/HA010238831.aspx)
 		[Parameter(
 			Mandatory=$false
 			, ParameterSetName="Filter"

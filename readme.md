@@ -58,7 +58,7 @@ Outlook.Application
 ##### Параметры	
 
 - `Filter <String>`
-        Поисковый запрос в [синтаксисе Outlook][Синтаксис языка фильтров Outlook]
+        Поисковый запрос в [синтаксисе Outlook](http://office.microsoft.com/ru-ru/outlook-help/HA010238831.aspx)
         
         Требуется?                    false
         Позиция?                    named
