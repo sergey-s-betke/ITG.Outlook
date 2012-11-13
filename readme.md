@@ -58,7 +58,7 @@ Outlook.Application
 ##### Параметры	
 
 - `Filter <String>`
-        Поисковый запрос в синтаксисе Outlook
+        Поисковый запрос в [синтаксисе Outlook][Синтаксис языка фильтров Outlook]
         
         Требуется?                    false
         Позиция?                    named
@@ -124,6 +124,10 @@ Outlook.Application
 1. Пример 1.
 
 		Get-Contact -Filter "[Subject]='Бетке Сергей Сергеевич'";
+
+##### Связанные ссылки
+
+- [Синтаксис языка фильтров Outlook]: http://office.microsoft.com/ru-ru/outlook-help/HA010238831.aspx
 			
 #### New-Contact
 

@@ -10,6 +10,8 @@ function Get-Contact {
 			Возвращаем найденный контакт из папки контактов по умолчанию.
 		.Description
 			Возвращаем найденный контакт из папки контактов по умолчанию.
+		.Link
+			[Синтаксис языка фильтров Outlook]: http://office.microsoft.com/ru-ru/outlook-help/HA010238831.aspx
 		.Example
 			Get-Contact -Filter "[Subject]='Бетке Сергей Сергеевич'";
 	#>
@@ -20,7 +22,7 @@ function Get-Contact {
 	)]
 	
 	param (
-		# Поисковый запрос в синтаксисе Outlook
+		# Поисковый запрос в [синтаксисе Outlook][Синтаксис языка фильтров Outlook]
 		[Parameter(
 			Mandatory=$false
 			, ParameterSetName="Filter"
