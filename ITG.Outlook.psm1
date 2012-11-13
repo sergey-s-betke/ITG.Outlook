@@ -105,11 +105,7 @@ function New-Contact {
 		.Description
 			Создание нового контакта.
 		.Example
-			Get-Content `
-			    -path $usersCsvFile `
-			| ConvertFrom-Csv `
-				-UseCulture `
-			New-Contact;
+			Get-Content $usersCsvFile | ConvertFrom-Csv -UseCulture | New-Contact;
 	#>
 
 	[CmdletBinding(
@@ -497,9 +493,7 @@ function Set-Contact {
 		.Description
 			Редактируем реквизиты контакта.
 		.Example
-			Get-Contact -Filter "[Subject]='Бетке Сергей Сергеевич'" `
-			| Set-Contact -Email1Address 'ivan.ivanov@domain.net' `
-			;
+			Get-Contact -Filter "[Subject]='Бетке Сергей Сергеевич'" | Set-Contact -Email1Address 'ivan.ivanov@domain.net';
 	#>
 
 	[CmdletBinding(
@@ -929,17 +923,11 @@ function Remove-Contact {
 		.Component
 			Outlook.Application
 		.Synopsis
-			Удаляем контакт
+			Удаляем контакт.
 		.Description
-			Удаляем контакт
+			Удаляем контакт.
 		.Example
-			Get-Content `
-			    -path $usersCsvFile `
-			| ConvertFrom-Csv `
-				-UseCulture `
-			| Get-Contact `
-			| Remove-Contact `
-			;
+			Get-Content $usersCsvFile | ConvertFrom-Csv -UseCulture | Get-Contact | Remove-Contact;
 	#>
 
 	[CmdletBinding(

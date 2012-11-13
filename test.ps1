@@ -18,18 +18,20 @@ param (
 )
 
 Import-Module `
-    (join-path `
-        -path ( ( [System.IO.FileInfo] ( $myinvocation.mycommand.path ) ).directory ) `
-        -childPath 'ITG.Outlook' `
+	(Join-Path `
+		-Path ( Split-Path -Path ( $MyInvocation.MyCommand.Path ) -Parent ) `
+        -ChildPath 'ITG.Outlook' `
     ) `
 	-Force `
-;
+	-PassThru `
+| Get-Readme -OutDefaultFile;
 
-get-content `
-    -path $csvFile `
-| convertFrom-csv `
-	-UseCulture `
-| New-Contact -Force -PassThru `
-| Select-Object Subject, EMail1DisplayName, EMail1Address `
-| Out-GridView `
-;
+#get-content `
+#    -path $csvFile `
+#| convertFrom-csv `
+#	-UseCulture `
+#| New-Contact -Force -PassThru `
+#| Select-Object Subject, EMail1DisplayName, EMail1Address `
+#| Out-GridView `
+#;
+#
